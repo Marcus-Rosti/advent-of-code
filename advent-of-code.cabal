@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Day.One.DayOne
+      Day.Two.DayTwo
   other-modules:
       Paths_advent_of_code
   hs-source-dirs:
@@ -41,7 +42,7 @@ executable advent-of-code-exe
       Paths_advent_of_code
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -Wall "-with-rtsopts=-N -s"
+  ghc-options: -O2 -threaded -rtsopts -Wall "-with-rtsopts=-N -s"
   build-depends:
       advent-of-code
     , base >=4.7 && <5
