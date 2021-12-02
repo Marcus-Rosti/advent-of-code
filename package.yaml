@@ -24,15 +24,19 @@ dependencies:
 
 library:
   source-dirs: src
+  ghc-options:
+    - -Wall
 
 executables:
   advent-of-code-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
+    # - -O2
     - -threaded
     - -rtsopts
-    - -with-rtsopts=-N
+    - -Wall
+    - '"-with-rtsopts=-N -s"'
     dependencies:
     - advent-of-code
 tests:
