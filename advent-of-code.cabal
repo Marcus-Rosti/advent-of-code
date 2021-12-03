@@ -25,7 +25,9 @@ source-repository head
 
 library
   exposed-modules:
+      Day.FileIO
       Day.One.DayOne
+      Day.Three.DayThree
       Day.Two.DayTwo
   other-modules:
       Paths_advent_of_code

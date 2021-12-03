@@ -1,6 +1,7 @@
 module Day.Two.DayTwo (day2) where
 
 import Data.Maybe
+import Day.FileIO (reader)
 
 data Position = Position Int Int | Aim Int Int Int
 
@@ -47,8 +48,8 @@ part2 = positionMult . aimMoves
 
 day2 :: String -> IO ()
 day2 file = do
-  contents <- readFile file
-  let linez = lines contents
-  let moves = fileToMoves linez
+  contents <- reader file
+  let moves = fileToMoves contents
+  print "Day 2"
   print $ part1 moves
   print $ part2 moves
