@@ -1,4 +1,4 @@
-module Day.Three.DayThree where
+module Day.Three.DayThree (day3) where
 
 import Control.Monad (liftM2)
 import Data.List

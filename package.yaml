@@ -21,6 +21,7 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- split < 1.0
 
 library:
   source-dirs: src
@@ -39,6 +40,7 @@ executables:
     - '"-with-rtsopts=-N -s"'
     dependencies:
     - advent-of-code
+    - split
 tests:
   advent-of-code-test:
     main:                Spec.hs
