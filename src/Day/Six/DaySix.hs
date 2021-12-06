@@ -33,18 +33,19 @@ stateAtI = (!!)
 header :: [String] -> [Int]
 header = map read . splitOn "," . head
 
-runProg :: Integral a => [a] -> Int -> Integer
-runProg xs i = sumState $ stateAtI (allStates (toState (map toInteger xs))) i
+runProg :: Integral a => [State a] -> Int -> Integer
+runProg xs i = sumState $ stateAtI xs i
 
-part1 :: [Int] -> Integer
+part1 :: Integral a => [State a] -> Integer
 part1 t = runProg t 80
 
-part2 :: [Int] -> Integer
+part2 :: Integral a => [State a] -> Integer
 part2 t = runProg t 256
 
 day6 :: String -> IO ()
 day6 file = do
   contents <- header <$> reader file
+  let allPossibleStates = allStates (toState (map toInteger contents))
   print "Day 6"
-  print $ part1 contents
-  print $ part2 contents
+  print $ part1 allPossibleStates
+  print $ part2 allPossibleStates
