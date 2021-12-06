@@ -29,6 +29,7 @@ library
       Day.Five.DayFive
       Day.Four.DayFour
       Day.One.DayOne
+      Day.Six.DaySix
       Day.Three.DayThree
       Day.Two.DayTwo
   other-modules:
