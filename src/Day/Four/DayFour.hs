@@ -18,6 +18,7 @@ day4 file = do
   contents <- reader file
   let (header, boards) = readBoards contents
   let wins = mapMaybe (findFinal header) boards
+  print "Day 4"
   print $ findMin wins
   print $ findMax wins
 
@@ -29,7 +30,6 @@ readBoard _ = []
 readBoards :: [String] -> (Header, [Board])
 readBoards linez = (header, boards)
   where
-    header :: [Int]
     header = map read $ splitOn "," $ head linez
     boards = readBoard (tail linez)
 

@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Day.FileIO
+      Day.Five.DayFive
       Day.Four.DayFour
       Day.One.DayOne
       Day.Three.DayThree
