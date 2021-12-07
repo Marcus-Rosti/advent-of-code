@@ -34,6 +34,9 @@ executables:
     source-dirs:         app
     ghc-options:
     - -O2
+    - -optc-Ofast
+    - -optc-flto
+    - -optc-march=native
     - -threaded
     - -rtsopts
     - -Wall

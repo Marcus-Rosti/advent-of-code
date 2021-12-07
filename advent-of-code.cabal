@@ -29,6 +29,7 @@ library
       Day.Five.DayFive
       Day.Four.DayFour
       Day.One.DayOne
+      Day.Seven.DaySeven
       Day.Six.DaySix
       Day.Three.DayThree
       Day.Two.DayTwo
@@ -48,7 +49,7 @@ executable advent-of-code-exe
       Paths_advent_of_code
   hs-source-dirs:
       app
-  ghc-options: -O2 -threaded -rtsopts -Wall "-with-rtsopts=-N -s"
+  ghc-options: -O2 -optc-Ofast -optc-flto -optc-march=native -threaded -rtsopts -Wall "-with-rtsopts=-N -s"
   build-depends:
       advent-of-code
     , base >=4.7 && <5
