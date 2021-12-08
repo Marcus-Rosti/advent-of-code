@@ -1,6 +1,7 @@
 module Day.Two.DayTwo (day2) where
 
 import Data.Maybe
+import Day.Base (Answer (Day), Solution)
 import Day.FileIO (reader)
 
 data Position = Position Int Int | Aim Int Int Int
@@ -46,10 +47,9 @@ part1 = positionMult . navigateMoves
 part2 :: [Move] -> Int
 part2 = positionMult . aimMoves
 
-day2 :: String -> IO ()
+day2 :: Solution Int Int
 day2 file = do
   contents <- reader file
   let moves = fileToMoves contents
-  print "Day 2"
-  print $ part1 moves
-  print $ part2 moves
+
+  return $ Day 2 (part1 moves) (part2 moves)

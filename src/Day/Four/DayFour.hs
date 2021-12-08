@@ -3,6 +3,7 @@ module Day.Four.DayFour (day4) where
 import Data.List (find, maximumBy, minimumBy, transpose)
 import Data.List.Split (splitOn)
 import Data.Maybe (mapMaybe)
+import Day.Base (Answer (Day), Solution)
 import Day.FileIO (reader)
 
 newtype Board = Board [[Int]] deriving (Show)
@@ -13,7 +14,10 @@ data State = State [Int] [Int] [[Int]]
 
 data WinState = WinState Int Int deriving (Show)
 
-day4 :: String -> IO ()
+fromWinState :: WinState -> Int
+fromWinState (WinState _ b) = b
+
+day4 :: Solution Int Int
 day4 file = do
   contents <- reader file
   let (header, boards) = readBoards contents
@@ -21,6 +25,7 @@ day4 file = do
   print "Day 4"
   print $ findMin wins
   print $ findMax wins
+  return $ Day 4 (fromWinState $ findMin wins) (fromWinState $ findMax wins)
 
 readBoard :: [String] -> [Board]
 readBoard [] = []

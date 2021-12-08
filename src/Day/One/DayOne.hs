@@ -1,6 +1,7 @@
 module Day.One.DayOne (day1) where
 
 import Data.List
+import Day.Base (Answer (Day), Solution)
 import Day.FileIO (reader)
 
 readLines :: [String] -> [Int]
@@ -26,9 +27,7 @@ part1 = countOfIncreasingValues
 part2 :: [Int] -> Int
 part2 = countOfIncreasingValues . map sum . slidingWindow 3
 
-day1 :: String -> IO ()
+day1 :: Solution Int Int
 day1 file = do
   list <- (fmap readLines . reader) file
-  putStrLn "Day 1"
-  print $ part1 list
-  print $ part2 list
+  return $ Day 1 (part1 list) (part2 list)

@@ -1,6 +1,7 @@
 module Day.Six.DaySix (day6) where
 
 import Data.List.Split (splitOn)
+import Day.Base (Answer (Day), Solution)
 import Day.FileIO (reader)
 
 data State a = State a a a a a a a a a
@@ -42,10 +43,8 @@ part1 t = runProg t 80
 part2 :: Integral a => [State a] -> Integer
 part2 t = runProg t 256
 
-day6 :: String -> IO ()
+day6 :: Solution Integer Integer
 day6 file = do
   contents <- header <$> reader file
   let allPossibleStates = allStates (toState (map toInteger contents))
-  print "Day 6"
-  print $ part1 allPossibleStates
-  print $ part2 allPossibleStates
+  return $ Day 6 (part1 allPossibleStates) (part2 allPossibleStates)

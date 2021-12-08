@@ -3,6 +3,7 @@ module Day.Five.DayFive (day5) where
 import Data.List
 import Data.List.Split (splitOn)
 import Data.Maybe (mapMaybe)
+import Day.Base (Answer (Day), Solution)
 import Day.FileIO (reader)
 
 data Point = Point Int Int deriving (Eq, Show, Ord)
@@ -43,9 +44,10 @@ readLine _ = Nothing
 readLines :: [String] -> [Line]
 readLines = mapMaybe (readLine . words)
 
-day5 :: String -> IO ()
+day5 :: Solution Int Int
 day5 file = do
   contents <- reader file
   let linez = readLines contents
   print "Day 5"
   print $ part1 linez
+  return $ Day 5 (part1 linez) (part1 linez)

@@ -2,6 +2,7 @@ module Day.Three.DayThree (day3) where
 
 import Control.Monad (liftM2)
 import Data.List
+import Day.Base (Answer (Day), Solution)
 import Day.FileIO (reader)
 
 type Bit = Int
@@ -66,10 +67,8 @@ part1 = liftM2 (*) gammaRate epsilonRate
 part2 :: [[Bit]] -> Int
 part2 = liftM2 (*) oxygenRate carbonRate
 
-day3 :: String -> IO ()
+day3 :: Solution Int Int
 day3 file = do
   contents <- reader file
   let bits = linesToBits contents
-  print "Day 3"
-  print $ part1 bits
-  print $ part2 bits
+  return $ Day 3 (part1 bits) (part2 bits)
