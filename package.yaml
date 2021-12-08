@@ -1,10 +1,10 @@
 name:                advent-of-code
-version:             0.1.0.0
+version:             1.0.0.0
 github:              "githubuser/advent-of-code"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2021 Author name here"
+author:              "Marcus Rosti"
+maintainer:          "rostimarcus@gmail.com.com"
+copyright:           "2021 Marcus Rosti"
 
 extra-source-files:
 - README.md

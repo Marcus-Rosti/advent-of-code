@@ -5,13 +5,13 @@ cabal-version: 1.12
 -- see: https://github.com/sol/hpack
 
 name:           advent-of-code
-version:        0.1.0.0
+version:        1.0.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/advent-of-code#readme>
 homepage:       https://github.com/githubuser/advent-of-code#readme
 bug-reports:    https://github.com/githubuser/advent-of-code/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2021 Author name here
+author:         Marcus Rosti
+maintainer:     rostimarcus@gmail.com.com
+copyright:      2021 Marcus Rosti
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      Day.Base
       Day.FileIO
       Day.Five.DayFive
       Day.Four.DayFour
