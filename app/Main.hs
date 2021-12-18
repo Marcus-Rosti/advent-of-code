@@ -1,5 +1,6 @@
 module Main where
 
+import Day.Day10
 import Day.Five.DayFive
 import Day.Four.DayFour
 import Day.One.DayOne
@@ -17,3 +18,4 @@ main = do
   day5 "data/day5/input"
   day6 "data/day6/input"
   day7 "data/day7/input"
+  day10 "data/day10/input"
