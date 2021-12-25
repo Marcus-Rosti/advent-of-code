@@ -1,7 +1,7 @@
 module Day.Day10 (day10) where
 
+import AOC
 import Data.List (sort)
-import Day.FileIO (reader)
 
 parser :: [Char] -> Char -> [Char]
 parser ")" _ = ")"
@@ -44,11 +44,5 @@ middle xs = xs !! (length xs `div` 2)
 part2 :: [String] -> Int
 part2 = middle . sort . filter (> 0) . map (foldl autocorrect 0 . parse)
 
-day10 :: String -> IO ()
-day10 file = do
-  linez <- reader file
-  let p1 = part1 linez
-  let p2 = part2 linez
-  putStrLn "Day 10"
-  print p1
-  print p2
+day10 :: Solution [String] Int Int
+day10 = Solution 10 id part1 part2

@@ -25,7 +25,10 @@ source-repository head
 
 library
   exposed-modules:
+      AOC
       Day.Day10
+      Day.Day11
+      Day.Day12
       Day.FileIO
       Day.Five.DayFive
       Day.Four.DayFour
@@ -41,7 +44,9 @@ library
   ghc-options: -Wall
   build-depends:
       base >=4.7 && <5
-    , split <1.0
+    , containers
+    , mtl
+    , split
   default-language: Haskell2010
 
 executable advent-of-code-exe
@@ -54,6 +59,8 @@ executable advent-of-code-exe
   build-depends:
       advent-of-code
     , base >=4.7 && <5
+    , containers
+    , mtl
     , split
   default-language: Haskell2010
 
@@ -68,5 +75,7 @@ test-suite advent-of-code-test
   build-depends:
       advent-of-code
     , base >=4.7 && <5
-    , split <1.0
+    , containers
+    , mtl
+    , split
   default-language: Haskell2010

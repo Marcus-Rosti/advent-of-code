@@ -1,14 +1,14 @@
-name:                advent-of-code
-version:             1.0.0.0
-github:              "githubuser/advent-of-code"
-license:             BSD3
-author:              "Marcus Rosti"
-maintainer:          "rostimarcus@gmail.com.com"
-copyright:           "2021 Marcus Rosti"
+name: advent-of-code
+version: 1.0.0.0
+github: "githubuser/advent-of-code"
+license: BSD3
+author: "Marcus Rosti"
+maintainer: "rostimarcus@gmail.com.com"
+copyright: "2021 Marcus Rosti"
 
 extra-source-files:
-- README.md
-- ChangeLog.md
+  - README.md
+  - ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -17,11 +17,13 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/githubuser/advent-of-code#readme>
+description: Please see the README on GitHub at <https://github.com/githubuser/advent-of-code#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- split < 1.0
+  - base >= 4.7 && < 5
+  - split
+  - containers
+  - mtl
 
 library:
   source-dirs: src
@@ -30,27 +32,27 @@ library:
 
 executables:
   advent-of-code-exe:
-    main:                Main.hs
-    source-dirs:         app
+    main: Main.hs
+    source-dirs: app
     ghc-options:
-    - -O2
-    - -optc-Ofast
-    - -optc-flto
-    - -optc-march=native
-    - -threaded
-    - -rtsopts
-    - -Wall
-    - '"-with-rtsopts=-N -s"'
+      - -O2
+      - -optc-Ofast
+      - -optc-flto
+      - -optc-march=native
+      - -threaded
+      - -rtsopts
+      - -Wall
+      - '"-with-rtsopts=-N -s"'
     dependencies:
-    - advent-of-code
-    - split
+      - advent-of-code
+      - split
 tests:
   advent-of-code-test:
-    main:                Spec.hs
-    source-dirs:         test
+    main: Spec.hs
+    source-dirs: test
     ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
     dependencies:
-    - advent-of-code
+      - advent-of-code
