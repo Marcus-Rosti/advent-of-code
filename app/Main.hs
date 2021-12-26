@@ -4,6 +4,7 @@ import AOC (exec)
 import Day.Day10
 import Day.Day11
 import Day.Day12 (day12)
+import Day.Day13 (day13)
 import Day.Five.DayFive
 import Day.Four.DayFour
 import Day.One.DayOne
@@ -24,3 +25,4 @@ main = do
   exec "data/day10/input" day10
   exec "data/day11/input" day11
   exec "data/day12/input" day12
+  exec "data/day13/input" day13

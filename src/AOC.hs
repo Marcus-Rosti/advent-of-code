@@ -14,10 +14,13 @@ data Solution parsed part1 part2 = Solution Int ([String] -> parsed) (parsed -> 
 reader :: FilePath -> IO [String]
 reader = fmap lines . readFile
 
+solve :: (input -> intermediate) -> (intermediate -> a) -> (intermediate -> b) -> input -> (a, b)
+solve parser part1 part2 input = (part1 . parser $ input, part2 . parser $ input)
+
 exec :: (Show b, Show c) => String -> Solution a b c -> IO ()
 exec file (Solution n parser part1 part2) = do
   putStrLn $ "Day " ++ show n
   contents <- reader file
-  let parsed = parser contents
-  print $ part1 parsed
-  print $ part2 parsed
+  let (a, b) = solve parser part1 part2 contents
+  print a
+  print b

@@ -1,7 +1,5 @@
 module Day.Day12 (day12) where
 
--- import Data.Graph
-
 import AOC
 import Data.Char (isUpper)
 import Data.List.Split (splitOn)
