@@ -30,6 +30,7 @@ library
       Day.Day11
       Day.Day12
       Day.Day13
+      Day.Day14
       Day.FileIO
       Day.Five.DayFive
       Day.Four.DayFour
@@ -42,7 +43,7 @@ library
       Paths_advent_of_code
   hs-source-dirs:
       src
-  ghc-options: -Wall
+  ghc-options: -Wall -O2 -optc-Ofast -optc-flto -optc-march=native -feager-blackholing -flate-dmd-anal -flate-specialise
   build-depends:
       base >=4.7 && <5
     , containers
@@ -56,7 +57,7 @@ executable advent-of-code-exe
       Paths_advent_of_code
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -Wall "-with-rtsopts=-N -s"
+  ghc-options: -O2 -optc-Ofast -optc-flto -optc-march=native -feager-blackholing -threaded -rtsopts -Wall -flate-dmd-anal "-with-rtsopts=-N -s" -flate-specialise
   build-depends:
       advent-of-code
     , base >=4.7 && <5

@@ -1,4 +1,4 @@
-module AOC (Solution (Solution), exec) where
+module AOC (Solution (Solution), exec, debug) where
 
 -- data Day where
 --   Day ::
@@ -21,6 +21,16 @@ exec :: (Show b, Show c) => String -> Solution a b c -> IO ()
 exec file (Solution n parser part1 part2) = do
   putStrLn $ "Day " ++ show n
   contents <- reader file
+  let (a, b) = solve parser part1 part2 contents
+  print a
+  print b
+
+debug :: (Show a, Show b, Show c) => String -> Solution a b c -> IO ()
+debug file (Solution n parser part1 part2) = do
+  putStrLn $ "Day " ++ show n
+  contents <- reader file
+  print contents
+  print $ parser contents
   let (a, b) = solve parser part1 part2 contents
   print a
   print b

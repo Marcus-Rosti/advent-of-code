@@ -29,16 +29,31 @@ library:
   source-dirs: src
   ghc-options:
     - -Wall
+    - -O2
+    - -optc-Ofast
+    - -optc-flto
+    - -optc-march=native
+    - -feager-blackholing
+    - -flate-dmd-anal
+    - -flate-specialise
 
 executables:
   advent-of-code-exe:
     main: Main.hs
     source-dirs: app
     ghc-options:
+      - -O2
+      - -optc-Ofast
+      - -optc-flto
+      - -optc-march=native
+      - -feager-blackholing
       - -threaded
       - -rtsopts
       - -Wall
+      - -flate-dmd-anal
       - '"-with-rtsopts=-N -s"'
+      - -flate-specialise
+
     dependencies:
       - advent-of-code
       - split
