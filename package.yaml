@@ -24,18 +24,19 @@ dependencies:
   - split
   - containers
   - mtl
+  - dijkstra-simple
 
 library:
   source-dirs: src
   ghc-options:
     - -Wall
     - -O2
-    - -optc-Ofast
-    - -optc-flto
-    - -optc-march=native
-    - -feager-blackholing
-    - -flate-dmd-anal
-    - -flate-specialise
+    # - -optc-Ofast
+    # - -optc-flto
+    # - -optc-march=native
+    # - -feager-blackholing
+    # - -flate-dmd-anal
+    # - -flate-specialise
 
 executables:
   advent-of-code-exe:
@@ -43,27 +44,24 @@ executables:
     source-dirs: app
     ghc-options:
       - -O2
-      - -optc-Ofast
-      - -optc-flto
-      - -optc-march=native
-      - -feager-blackholing
+      # - -optc-Ofast
+      # - -optc-flto
+      # - -optc-march=native
+      # - -feager-blackholing
       - -threaded
       - -rtsopts
-      - -Wall
-      - -flate-dmd-anal
       - '"-with-rtsopts=-N -s"'
-      - -flate-specialise
 
     dependencies:
       - advent-of-code
       - split
-tests:
-  advent-of-code-test:
-    main: Spec.hs
-    source-dirs: test
-    ghc-options:
-      - -threaded
-      - -rtsopts
-      - -with-rtsopts=-N
-    dependencies:
-      - advent-of-code
+# tests:
+#   advent-of-code-test:
+#     main: Spec.hs
+#     source-dirs: test
+#     ghc-options:
+#       - -threaded
+#       - -rtsopts
+#       - -with-rtsopts=-N
+#     dependencies:
+#       - advent-of-code
