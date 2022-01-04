@@ -1,98 +1,52 @@
-module Day.Day15 (day15) where
+module Day.Day15 (day15, expand) where
 
 import AOC (Solution (Solution))
-import Data.Bifunctor (second)
-import Data.List (delete, find, minimumBy, sortOn)
 import qualified Data.Map as M
-import Data.Maybe
-import qualified Data.PQueue.Min as Q
-import qualified Data.Set as S
+import Data.Maybe (fromJust, mapMaybe)
+import Graph.DijkstraSimple
+  ( EdgeTo (EdgeTo),
+    Graph (Graph),
+    Path (pathWeight),
+    findPath,
+  )
+import Graph.DijkstraSimple.Weighters (cumulativeWeighter)
 
-type Point = (Int, Int)
-
-type Risk = Int
-
-type Vertex = (Point, Risk)
-
-type AdjacentPoints = M.Map Point [Point]
-
-type RiskAtPoint = M.Map Point Risk
-
-type Graph = M.Map Vertex [Vertex]
-
-data QueueElem = QueueElem Point Risk deriving (Show)
-
-instance (Eq QueueElem) where
-  (==) (QueueElem p1 _) (QueueElem p2 _) = p1 == p2
-  (/=) (QueueElem p1 _) (QueueElem p2 _) = p1 /= p2
-
-instance (Ord QueueElem) where
-  compare (QueueElem _ r1) (QueueElem _ r2) = compare r1 r2
-
-infinity :: Num a => a
-infinity = 1000000
-
-lookupWithDefault :: (Num a, Ord k) => k -> M.Map k a -> a
-lookupWithDefault k m = fromMaybe infinity (M.lookup k m)
-
--- type Graph = [Vertex]
--- Parsing
-neighbors :: [Vertex] -> Vertex -> (Vertex, [Vertex])
-neighbors vs v@((x, y), _) = (v, toLookup)
+expand :: Integral a => M.Map (a, a) a -> a -> M.Map (a, a) a
+expand initial to = M.fromList vs2
   where
-    toLookup = mapMaybe (\t -> fmap (\c -> (t, c)) (lookup t vs)) [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
+    elements = M.toList initial
+    (mx, my) = maximum $ map fst elements
+    vs2 = do
+      ((x, y), r) <- elements
+      i <- [0 .. (to - 1)]
+      j <- [0 .. (to - 1)]
+      return ((x + i * (mx + 1), y + j * (my + 1)), mod (r - 1 + i + j) 9 + 1)
 
-parse :: [String] -> Graph
-parse input = aj
+neighbors :: (Ord a, Num a, Ord b, Num b) => M.Map (a, a) b -> ((a, a), b) -> ((a, a), [EdgeTo (a, a) b])
+neighbors vs (p@(x, y), _) = (p, edges)
+  where
+    toLookup = mapMaybe (\potentialNeighbor -> fmap (\riskAtNeighbor -> (potentialNeighbor, riskAtNeighbor)) (M.lookup potentialNeighbor vs)) [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
+    edges = map (uncurry EdgeTo) toLookup
+
+getGraph :: (Ord b, Num b, Ord e, Num e) => [((b, b), e)] -> Graph (b, b) e
+getGraph = Graph . M.fromList . (map =<< neighbors . M.fromList)
+
+-- parse
+parse :: [[Char]] -> Graph (Int, Int) Int
+parse input = getGraph (M.toList (expand (M.fromList t) 5))
   where
     p = map (map (read . (: []))) input
     t = [((x, y), p !! y !! x) | y <- [0 .. length p -1], x <- [0 .. length (head p) -1]]
-    aj = M.fromList (map (neighbors t) t)
 
--- minimumValueFromMap :: (Ord b) => [(a, b)] -> Maybe a
--- minimumValueFromMap [] = Nothing
--- minimumValueFromMap xs = Just (fst (minimumBy (\(_, a) (_, b) -> compare a b) xs))
+shortestPath :: (Ord a, Num a, Ord b) => Graph b a -> b -> b -> a
+shortestPath g start end = pathWeight $ fromJust $ findPath g start cumulativeWeighter end
 
--- minimumRisk :: (Ord a, Ord b) => M.Map a b -> [a] -> Maybe a
--- minimumRisk riskMap toVisit = minPoint
---   where
---     lookedup = mapMaybe (\k -> fmap (\v -> (k, v)) (M.lookup k riskMap)) toVisit
---     minPoint = minimumValueFromMap lookedup
+part1 :: (Ord a, Num a, Integral b) => Graph (a, a) b -> b
+part1 g = shortestPath g (0, 0) (99, 99)
 
-getVertexFromGraph :: Eq a1 => M.Map (a1, b) a2 -> a1 -> Maybe (a1, b)
-getVertexFromGraph g p = find (\(p2, _) -> p == p2) $ M.keys g
+part2 :: (Ord a, Num a, Integral b) => Graph (a, a) b -> b
+part2 g = shortestPath g (0, 0) (499, 499)
 
-findNeighborsByPoint :: (Ord a1, Ord b) => M.Map (a1, b) [a] -> a1 -> [a]
-findNeighborsByPoint g p = fromMaybe [] $ do
-  verty <- getVertexFromGraph g p
-  M.lookup verty g
-
---Djikstra's
-djikstra :: AdjacentPoints -> RiskAtPoint -> Point -> M.Map Point Risk
-djikstra adjacents risksAtPoint start = search totalRisk q
-  where
-    initialPoints = (map fst . M.keys) g
-    q :: Q.MinQueue QueueElem
-    q = Q.insert (QueueElem start 0) $ Q.fromList (map (QueueElem infinity) initialPoints)
-    totalRisk = M.singleton start 0
-    search :: M.Map Point Risk -> Q.MinQueue (Risk, Point) -> M.Map Point Risk
-    search risks toVisit = if Q.null toVisit then risks else search (M.union (M.fromList x) risks) queue
-      where
-        ((riskAtNext, next), queue) = Q.deleteFindMin toVisit
-        nextPoints = fromMaybe [] $ M.lookup next adjacents
-        t = do
-          v <- nextPoints
-          let alt = maybe infinity (riskAtNext +) (M.lookup v risksAtPoint)
-          let dv = lookupWithDefault v risks
-          [(v, dv) | alt < dv]
-
--- x = filter (\(p, v) -> v < fromMaybe infinity (M.lookup p risks)) $ map (second (riskAtNext +)) nextPoints
-
-part1 :: Graph -> Risk
-part1 g = fromMaybe (-1) $ M.lookup (9, 9) (djikstra g (0, 0))
-
-part2 :: Graph -> Risk
-part2 _ = 1
-
-day15 :: Solution Graph Risk Risk
+-- day15 :: Solution Graph Risk Risk
+-- day15 :: Solution [((Int, Int), Int)] Int Int
 day15 = Solution 15 parse part1 part2

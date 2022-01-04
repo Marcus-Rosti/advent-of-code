@@ -29,4 +29,4 @@ main = do
   -- exec "data/day12/input" day12
   -- exec "data/day13/input" day13
   -- exec "data/day14/input" day14
-  exec "data/day15/sample" day15
+  exec "data/day15/input" day15

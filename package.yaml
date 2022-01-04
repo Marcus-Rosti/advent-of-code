@@ -30,24 +30,26 @@ library:
   source-dirs: src
   ghc-options:
     - -Wall
-    - -O2
-    # - -optc-Ofast
-    # - -optc-flto
-    # - -optc-march=native
-    # - -feager-blackholing
-    # - -flate-dmd-anal
-    # - -flate-specialise
+    # - -O2
+    - -optc-Ofast
+    - -optc-flto
+    - -optc-march=native
+    - -feager-blackholing
+    - -flate-dmd-anal
+    - -flate-specialise
+  dependencies:
+    - dijkstra-simple
 
 executables:
   advent-of-code-exe:
     main: Main.hs
     source-dirs: app
     ghc-options:
-      - -O2
-      # - -optc-Ofast
-      # - -optc-flto
-      # - -optc-march=native
-      # - -feager-blackholing
+      # - -O2
+      - -optc-Ofast
+      - -optc-flto
+      - -optc-march=native
+      - -feager-blackholing
       - -threaded
       - -rtsopts
       - '"-with-rtsopts=-N -s"'
@@ -55,6 +57,7 @@ executables:
     dependencies:
       - advent-of-code
       - split
+      - dijkstra-simple
 # tests:
 #   advent-of-code-test:
 #     main: Spec.hs

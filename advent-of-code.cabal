@@ -44,7 +44,7 @@ library
       Paths_advent_of_code
   hs-source-dirs:
       src
-  ghc-options: -Wall -O2
+  ghc-options: -Wall -optc-Ofast -optc-flto -optc-march=native -feager-blackholing -flate-dmd-anal -flate-specialise
   build-depends:
       base >=4.7 && <5
     , containers
@@ -59,7 +59,7 @@ executable advent-of-code-exe
       Paths_advent_of_code
   hs-source-dirs:
       app
-  ghc-options: -O2 -threaded -rtsopts "-with-rtsopts=-N -s"
+  ghc-options: -optc-Ofast -optc-flto -optc-march=native -feager-blackholing -threaded -rtsopts "-with-rtsopts=-N -s"
   build-depends:
       advent-of-code
     , base >=4.7 && <5
