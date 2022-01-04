@@ -31,6 +31,8 @@ library:
   ghc-options:
     - -Wall
     # - -O2
+    - -fwrite-ide-info
+    - -hiedir=.hie
     - -optc-Ofast
     - -optc-flto
     - -optc-march=native

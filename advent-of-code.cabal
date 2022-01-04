@@ -44,7 +44,7 @@ library
       Paths_advent_of_code
   hs-source-dirs:
       src
-  ghc-options: -Wall -optc-Ofast -optc-flto -optc-march=native -feager-blackholing -flate-dmd-anal -flate-specialise
+  ghc-options: -Wall -fwrite-ide-info -hiedir=.hie -optc-Ofast -optc-flto -optc-march=native -feager-blackholing -flate-dmd-anal -flate-specialise
   build-depends:
       base >=4.7 && <5
     , containers
